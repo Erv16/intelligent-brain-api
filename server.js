@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt-nodejs');
+const cors = require('cors');
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = {
   users: [
@@ -57,6 +60,7 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { email, name, password } = req.body;
+
   database.users.push({
     id: '125',
     name: name,
@@ -86,11 +90,3 @@ app.post('/image', (req, res) => {
 app.listen(3000, () => {
   console.log('App is running on port 3000');
 });
-
-/*
-/ --> res = this is working
-/signin --> POST = success/fail
-/register --> POST = user
-/profile/:userid --> GET = user
-/image --> PUT = user
-*/
